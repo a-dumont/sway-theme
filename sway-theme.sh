@@ -17,8 +17,6 @@ DIR=$(eval echo ~$USER/.local/share/themes/$THEME)
 DIR2=$(eval echo ~$USER/.local/share/themes)
 CACHE=$(eval echo ~$USER/.cache)
 
-echo $BACKEND
-
 if [ $THEME = "Next" ]; then
 		CURRENT=$(cat $DIR2/current)
 		ALL_THEMES=($(ls -l $DIR2 | grep '^d' | awk '{printf $NF"\n"}'))
