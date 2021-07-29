@@ -65,7 +65,7 @@ if [ ! -d "$DIR" ]; then
 					mkdir $DIR
 					cp $IMG $DIR/background.jpg
 					convert -blur 0x6 -resize 1920x1080! $DIR/background.jpg $DIR/lockscreen.jpg
-					wal -q -e -t -s -n -i $DIR/background.jpg
+					wal -q -e -t -s -n --backend colorz -i $DIR/background.jpg
 					
 					cp $CACHE/wal/colors.json  $DIR/colors-wal.json
 					sed -i -e '1,6d' $DIR/colors-wal.json
