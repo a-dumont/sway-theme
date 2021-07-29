@@ -1,16 +1,23 @@
 #!/bin/bash
 
-while getopts i: flag
+while getopts i:b: flag
 do
     case "${flag}" in
         i) IMG=${OPTARG};;
+		b) BACKEND=${OPTARG};;
     esac
 done
+
+if [ -z $BACKEND ]; then
+		BACKEND="wal"
+fi
 
 THEME=${@:$OPTIND:1}
 DIR=$(eval echo ~$USER/.local/share/themes/$THEME)
 DIR2=$(eval echo ~$USER/.local/share/themes)
 CACHE=$(eval echo ~$USER/.cache)
+
+echo $BACKEND
 
 if [ $THEME = "Next" ]; then
 		CURRENT=$(cat $DIR2/current)
@@ -65,7 +72,7 @@ if [ ! -d "$DIR" ]; then
 					mkdir $DIR
 					cp $IMG $DIR/background.jpg
 					convert -blur 0x6 -resize 1920x1080! $DIR/background.jpg $DIR/lockscreen.jpg
-					wal -q -e -t -s -n --backend colorz -i $DIR/background.jpg
+					wal -q -e -t -s -n --backend $BACKEND -i $DIR/background.jpg
 					
 					cp $CACHE/wal/colors.json  $DIR/colors-wal.json
 					sed -i -e '1,6d' $DIR/colors-wal.json
